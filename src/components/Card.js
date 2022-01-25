@@ -74,23 +74,6 @@ const Card = ({ movie }) => {
 		return genreArray.map((genre) => <li key={genre}>{genre}</li>);
 	};
 
-	const addStorage = () => {
-		let storedData = window.localStorage.movies ? window.localStorage.movies.split(',') : [];
-
-		if (!storedData.includes(movie.id.toString())) {
-			storedData.push(movie.id);
-			window.localStorage.movies = storedData;
-		}
-	};
-
-	const deleteStorage = () => {
-		let storedData = window.localStorage.movies.split(',');
-
-		let newData = storedData.filter((id) => id !== movie.id);
-
-		window.localStorage.movies = newData;
-	};
-
 	return (
 		<div className="card">
 			<img
@@ -112,19 +95,9 @@ const Card = ({ movie }) => {
 			<p>{movie.overview}</p>
 
 			{movie.genre_ids ? (
-				<div className="btn" onClick={() => addStorage()}>
-					Add to favorites
-				</div>
+				<div className="btn">Add to favorites</div>
 			) : (
-				<div
-					className="btn"
-					onClick={() => {
-						deleteStorage();
-						window.location.reload();
-					}}
-				>
-					Delete from the list
-				</div>
+				<div className="btn">Delete from the list</div>
 			)}
 		</div>
 	);
