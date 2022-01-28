@@ -1,6 +1,13 @@
 import React from 'react';
 
 const Card = ({ movie }) => {
+	const addStorage = () => {
+		let storeFavMovie = window.localStorage.movies ? window.localStorage.movies.split(',') : [];
+		if (!storeFavMovie.includes(movie.id.toString())) {
+			storeFavMovie.push(movie.id);
+			window.localStorage.movies = storeFavMovie;
+		}
+	};
 	const dateFormater = (date) => {
 		let [yy, mm, dd] = date.split('-');
 		return [dd, mm, yy].join('/');
@@ -95,7 +102,9 @@ const Card = ({ movie }) => {
 			<p>{movie.overview}</p>
 
 			{movie.genre_ids ? (
-				<div className="btn">Add to favorites</div>
+				<div className="btn" onClick={() => addStorage()}>
+					Add to favorites
+				</div>
 			) : (
 				<div className="btn">Delete from the list</div>
 			)}
