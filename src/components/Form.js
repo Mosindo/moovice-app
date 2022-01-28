@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Card from './Card';
 
-// add the case when nothing is find in the researche
 const Form = () => {
 	const [moviesData, setMoviesData] = useState([]);
 	const [search, setSearch] = useState('code');
