@@ -13,6 +13,14 @@ const Card = ({ movie }) => {
 		return [dd, mm, yy].join('/');
 	};
 
+	const deleteStorage = () => {
+		let storedData = window.localStorage.movies.split(',');
+
+		let newData = storedData.filter((id) => id != movie.id);
+
+		window.localStorage.movies = newData;
+	};
+
 	const genreFinder = () => {
 		let genreArray = [];
 		for (let i = 0; i < movie.genre_ids.length; i++) {
@@ -106,7 +114,15 @@ const Card = ({ movie }) => {
 					Add to favorites
 				</div>
 			) : (
-				<div className="btn">Delete from the list</div>
+				<div
+					className="btn"
+					onClick={() => {
+						deleteStorage();
+						window.location.reload();
+					}}
+				>
+					Delete from the list
+				</div>
 			)}
 		</div>
 	);
